@@ -1,0 +1,28 @@
+<!-- Radio group html code end -->
+<ng-container *ngFor="let item of items">
+  <div class="blocx-radio" tabindex="0">
+    <div class="blocx-input-group">
+      <input
+        #input
+        type="radio"
+        [id]="item.id"
+        [value]="item.value"
+        [name]="item.name"
+        [required]="required"
+        [ngModel]="value"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledby"
+        [attr.aria-describedby]="ariaDescribedby"
+        (ngModelChange)="_onRadioModelChange($event)"
+        (click)="_onInputClick($event)"
+      />
+
+      <label [attr.for]="item.id" class="{{ radioLabelStyle }}" #label >
+      </label>
+      <span class="blocx-label-style">
+          {{ item.label }}
+      </span>
+    </div>
+</div>
+</ng-container>
+<!-- Radio group html code end -->

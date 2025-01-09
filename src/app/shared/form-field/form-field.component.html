@@ -1,0 +1,20 @@
+<ng-template #labelTemplate>
+  <label
+    [id]="_labelId"
+    [attr.for]="_control.id"
+    [attr.aria-owns]="_control.id"
+  >
+    <ng-content select="blocx-label"></ng-content>
+    <span
+      aria-hidden="true"
+      *ngIf="!hideRequiredMarker && _control.required && !_control.disabled"
+      >&#32;*</span
+    >
+  </label>
+</ng-template>
+
+<div class="blocx-input-group">
+  <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
+  <ng-content></ng-content>
+  <ng-content select="mat-error"></ng-content>
+</div>

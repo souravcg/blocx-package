@@ -1,0 +1,101 @@
+//Radio input variables
+@import "../../../../assets/styles/base/index";
+
+//Radio input variables
+$blocx-radio-checked-position: absolute;
+$blocx-radio-checked-left: -9999px;
+$blocx-radio-label-checked-position: relative;
+$blocx-radio-label-checked-padding-left: 16px;
+$blocx-radio-label-checked-cursor: pointer;
+$blocx-radio-label-checked-line-height: 20px;
+$blocx-radio-label-checked-display: inline-block;
+$blocx-radio-label-checked-color: #3E3E3C;
+$blocx-radio-label-before-checked-position: absolute;
+$blocx-radio-label-before-checked-left: 0;
+$blocx-radio-label-before-checked-top: 0;
+$blocx-radio-label-before-checked-width: 14px;
+$blocx-radio-label-before-checked-height: 14px;
+$blocx-radio-label-before-checked-border: 1px solid #DDDBDA;
+$blocx-radio-label-before-checked-border-radius: 100%;
+$blocx-radio-label-before-checked-background: transparent;
+$blocx-radio-label-after-checked-not-content: '';
+$blocx-radio-label-after-checked-not-width: 8px;
+$blocx-radio-label-after-checked-not-height: 8px;
+$blocx-radio-label-after-checked-not-position: absolute;
+$blocx-radio-label-after-checked-not-top: 4px;
+$blocx-radio-label-after-checked-not-left: 4px;
+$blocx-radio-label-after-checked-not-transition: all 0.1s ease;
+$blocx-radio-label-after-checked-not-opacity: 0;
+$blocx-radio-label-after-checked-not-transform: scale(0);
+$blocx-radio-label-after-checked-opacity: 1;
+$blocx-radio-label-after-checked-transform: scale(1);
+$blocx-radio-label-font-size:13px;
+// radio input styles start
+.blocx-radio {
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        @include blocx-abs($left: $blocx-radio-checked-left);
+    }
+    [type="radio"]:checked+label,
+    [type="radio"]:not(:checked)+label {
+        position: $blocx-radio-label-checked-position;
+        //padding-left: $blocx-radio-label-checked-padding-left;
+        cursor: $blocx-radio-label-checked-cursor;
+        font-size: $blocx-radio-label-font-size;
+        line-height: $blocx-radio-label-checked-line-height;
+        //display: $blocx-radio-label-checked-display;
+        @include blocx-themify($themes) {
+            color: blocx-themed('textColor');
+        }
+        font-weight: normal;
+        margin-right: 5px;
+    }
+    [type="radio"]:checked+label:before,
+    [type="radio"]:not(:checked)+label:before {
+        content: '';
+        @include blocx-abs($top: $blocx-radio-label-before-checked-top, $left: $blocx-radio-label-before-checked-left);
+        width: $blocx-radio-label-before-checked-width;
+        height: $blocx-radio-label-before-checked-height;
+        border: $blocx-radio-label-before-checked-border;
+        border-radius: $blocx-radio-label-before-checked-border-radius;
+        background: $blocx-radio-label-before-checked-background;
+    }
+    [type="radio"]:checked+label:before {
+        border: 1px solid #DDDBDA;
+    }
+    [type="radio"]:checked+label:after,
+    [type="radio"]:not(:checked)+label:after {
+        content: $blocx-radio-label-after-checked-not-content;
+        width: $blocx-radio-label-after-checked-not-width;
+        height: $blocx-radio-label-after-checked-not-height;
+        @include blocx-themify($themes) {
+            background: blocx-themed('primaryColor');
+        }
+        @include blocx-abs($top: $blocx-radio-label-after-checked-not-top, $left: $blocx-radio-label-after-checked-not-left);
+        border-radius: $blocx-radio-label-before-checked-border-radius;
+        -webkit-transition: $blocx-radio-label-after-checked-not-transition;
+        transition: $blocx-radio-label-after-checked-not-transition;
+    }
+    [type="radio"]:not(:checked)+label:after {
+        opacity: $blocx-radio-label-after-checked-not-opacity;
+        -webkit-transform: $blocx-radio-label-after-checked-not-transform;
+        transform: $blocx-radio-label-after-checked-not-transform;
+    }
+    [type="radio"]:checked+label:after {
+        opacity: $blocx-radio-label-after-checked-opacity;
+        -webkit-transform: $blocx-radio-label-after-checked-transform;
+        transform: $blocx-radio-label-after-checked-transform;
+    }
+    .blocx-label-style {
+        padding-left: $blocx-radio-label-checked-padding-left;
+        cursor: $blocx-radio-label-checked-cursor;
+        font-size: $blocx-radio-label-font-size;
+        line-height: $blocx-radio-label-checked-line-height;
+        //display: $blocx-radio-label-checked-display;
+        @include blocx-themify($themes) {
+            color: blocx-themed('textColor');
+        }
+        font-weight: normal;
+        // margin-right: 5px;
+    }
+}

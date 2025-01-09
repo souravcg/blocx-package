@@ -1,0 +1,307 @@
+// Buttons variables
+@import "../../../../assets/styles/base/index";
+// blocx-buttons component variables
+$blocx-button-focus-width: 5px !default;
+$blocx-button-border-width: 1px !default;
+$blocx-button-padding-y-lg: 8px !default;
+$blocx-button-padding-x-lg: 16px !default;
+$font-size-lg: 20px !default;
+$blocx-button-line-height-lg: 24px !default;
+$blocx-button-border-radius-lg: 4.8px !default;
+$blocx-button-padding-y-sm: 4px !default;
+$blocx-button-padding-x-sm: 8px !default;
+$font-size-sm: 14px !default;
+$blocx-button-line-height-sm: 1.5 !default;
+$blocx-button-border-radius-sm: 8px !default;
+$blocx-button-line-height: 28px !default;
+$blocx-button-border-radius: 6px !default;
+$blocx-button-font-size: 13px !default;
+$blocx-button-cursor: pointer !default;
+$blocx-button-display: inline-block !default;
+$blocx-button-position: relative !default;
+$blocx-button-text-align: center !default;
+$blocx-button-inner-primary-color: inherit !default;
+$blocx-button-inner-primary-background-color: transparent !default;
+$blocx-button-inner-primary-border: transparent !default;
+$blocx-success-color: #080707;
+$blocx-button-font-family: "Acumin Pro", sans-serif;
+$blocx-button-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$blocx-button-colors: map-merge(
+    (
+        "primary": #16325c,
+        "secondary": #0672d1,
+        // "secondary":  #16325C,
+        "success": #26824e,
+        "info": #17a2b8,
+        "warning": #ffc107,
+        "danger": #e32d0d,
+    ),
+    $blocx-button-colors
+);
+//blocx-button component styles
+// Button mixins
+@mixin show-color($type) {
+    @if ($type== "light") {
+        color: $black;
+    } @else if($type== "link") {
+        color: $blue;
+        border: none;
+    } @else if($type== "success") {
+        color: $blocx-success-color;
+        // border: none;
+    } @else {
+        color: $white;
+    }
+}
+
+// based on button type color change mixin
+@mixin button-variant($color, $background, $border) {
+    @include show-color($color);
+    @if ($color== "primary") {
+        @include blocx-themify($themes) {
+            background: blocx-themed("primaryColor");
+            border-color: darken(blocx-themed("primaryColor"), 5%);
+        }
+    } @else {
+        background-color: $background;
+        border-color: darken($border, 5%);
+    }
+    line-height: 30px;
+    &:focus,
+    &.focus {
+        color: $white;
+        @if ($color== "primary") {
+            @include blocx-themify($themes) {
+                background: darken(blocx-themed("primaryColor"), 10%);
+                border-color: darken(blocx-themed("primaryColor"), 25%);
+            }
+        } @else {
+            @include blocx-themify($themes) {
+                background-color: blocx-themed("primaryColor");
+                border-color: blocx-themed("primaryColor");
+            }
+            // background-color: darken($background, 10%);
+            // border-color: darken($border, 25%);
+        }
+    }
+    &:hover {
+        color: $white;
+        cursor: pointer;
+        @if ($color== "primary") {
+            // @include blocx-themify($themes) {
+            // 	background: darken(blocx-themed('primaryColor'), 10%);
+            // 	border-color: darken(blocx-themed('primaryColor'), 12%);
+            // }
+            @include blocx-themify($themes) {
+                background-color: blocx-themed("primaryColor");
+                border-color: blocx-themed("primaryColor");
+            }
+        } @else {
+            @include blocx-themify($themes) {
+                background-color: blocx-themed("primaryColor");
+                border-color: blocx-themed("primaryColor");
+            }
+            // background-color: darken($background, 10%);
+            // border-color: darken($border, 12%);
+        }
+    }
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        color: $color;
+        @include blocx-themify($themes) {
+            background-color: blocx-themed("primaryColor");
+            border-color: blocx-themed("primaryColor");
+        }
+        // background-color: darken($background, 10%);
+        background-image: none;
+        // border-color: darken($border, 12%);
+        &:hover,
+        &:focus,
+        &.focus {
+            color: $color;
+            @include blocx-themify($themes) {
+                background-color: blocx-themed("primaryColor");
+                border-color: blocx-themed("primaryColor");
+            }
+            // background-color: darken($background, 17%);
+            // border-color: darken($border, 25%);
+        }
+    }
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        &:hover,
+        &:focus,
+        &.focus {
+            background-color: $background;
+            border-color: $border;
+        }
+    }
+    .badge {
+        color: $background;
+        background-color: $color;
+    }
+}
+
+// based on outline button color change mixin
+@mixin button-outline-variant($color, $background, $border) {
+    color: $color;
+    border-color: $color;
+    background-color: transparent;
+    font-size: 12px;
+    border: 2px solid $color;
+    &:hover {
+        color: #ffffff;
+        background-color: $background;
+        border-color: $border;
+    }
+    &:focus, // &.focus {}
+    &.disabled,
+    &:disabled {
+        color: $color;
+        background-color: transparent;
+    }
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+    padding: $padding-y $padding-x;
+    font-size: $font-size;
+    line-height: $line-height;
+    border-radius: $border-radius;
+}
+
+// Button styles
+.blocx-button {
+    border: $blocx-button-border-width solid transparent;
+    @include blocx-themify($themes) {
+        border-radius: blocx-themed("borderRadius");
+    }
+    // border-radius: $blocx-button-border-radius;
+    cursor: $blocx-button-cursor;
+    display: $blocx-button-display;
+    font-size: $blocx-button-font-size;
+    font-weight: $font-semibold;
+    font-family: $blocx-button-font-family;
+    line-height: $blocx-button-line-height;
+    padding: 0 40px;
+    position: $blocx-button-position;
+    text-align: $blocx-button-text-align;
+    &:focus {
+        outline: 0;
+    }
+    .blocx-button-icon {
+        margin-right: 8px;
+    }
+    .blocx-button-icon-right {
+        margin-left: 8px;
+    }
+    // .blocx-button-icon-primary{
+    // 	&::before{
+    // 		content:"\f2c0" ;
+    // 		color:#fff;
+    // 		font-family: FontAwesome;
+    // 		width: 30px;
+    // 			height: 30px;
+    // 			padding-right: 10px;
+    // 	}
+    // }
+    // .blocx-button-icon-secondary{
+    // 	&::before{
+    // 		content:"\f2cb" ;
+    // 		color:#fff;
+    // 		font-family: FontAwesome;
+    // 		width: 30px;
+    // 			height: 30px;
+    // 			padding-right: 10px;
+    // 	}
+    // }
+    // .blocx-button-icon-success{
+    // 	&::before{
+    // 		content:"\f2ba" ;
+    // 		color:#000;
+    // 		font-family: FontAwesome;
+    // 		width: 30px;
+    // 			height: 30px;
+    // 			padding-right: 10px;
+    // 	}
+    // }
+    // .blocx-button-icon-fail{
+    // 	&::before{
+    // 		content:"\f2b7" ;
+    // 		color:#fff;
+    // 		font-family: FontAwesome;
+    // 		width: 30px;
+    // 			height: 30px;
+    // 			padding-right: 10px;
+    // 	}
+    // }
+}
+
+.blocx-button_inner-primary {
+    background-color: $blocx-button-inner-primary-background-color;
+    border: $blocx-button-inner-primary-border;
+    color: $blocx-button-inner-primary-color;
+    cursor: $blocx-button-cursor;
+    &:focus {
+        outline: none;
+    }
+}
+
+// Alternate buttons
+@each $color, $value in $blocx-button-colors {
+    .blocx-button-#{$color} {
+        @include button-variant($color, $value, $value);
+    }
+}
+
+@each $color, $value in $blocx-button-colors {
+    .blocx-button-outline-#{$color} {
+        @include button-outline-variant($value, $value, $value);
+    }
+}
+
+// Button Sizes
+.blocx-button-lg {
+    @include button-size(
+        $blocx-button-padding-y-lg,
+        $blocx-button-padding-x-lg,
+        $font-size-lg,
+        $blocx-button-line-height-lg,
+        $blocx-button-border-radius-lg
+    );
+}
+
+.blocx-button-sm {
+    @include button-size(
+        $blocx-button-padding-y-sm,
+        $blocx-button-padding-x-sm,
+        $font-size-sm,
+        $blocx-button-line-height-sm,
+        $blocx-button-border-radius-sm
+    );
+}
+
+// background-color is added after hover on Success and Fail button
+.blocx-button-success,
+.blocx-button-outline-success:hover {
+    color: #ffffff;
+}
+
+.blocx-button-success:hover,
+.blocx-button-success:focus {
+    color: $white;
+    cursor: pointer;
+    background-color: #206940 !important;
+    border-color: #206940 !important;
+}
+
+.blocx-button-danger:hover,
+.blocx-button-danger:focus {
+    color: $white;
+    cursor: pointer;
+    background-color: #cb280c !important;
+    border-color: #cb280c !important;
+}

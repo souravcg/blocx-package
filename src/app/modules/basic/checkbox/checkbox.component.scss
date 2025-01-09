@@ -1,0 +1,112 @@
+@import '../../../../assets/styles/base/index';
+
+//Checkbox variables
+$blocx-checkbox-position:absolute !default;
+$blocx-checkbox-left:12px !default;
+$blocx-checkbox-top:0 !default;
+$blocx-checkbox-margin:0 !default;
+$blocx-checkbox-padding:0 !default;
+$blocx-checkbox-opacity:0 !default;
+$blocx-checkbox-label-padding-left:16px !default;
+$blocx-checkbox-label-padding-top:10px !default;
+$blocx-checkbox-label-before-after-display:block !default;
+$blocx-checkbox-label-before-after-width:16px !default;
+$blocx-checkbox-label-before-after-height:16px !default;
+$blocx-checkbox-label-before-after-position:absolute !default;
+$blocx-checkbox-label-before-after-top:50% !default;
+$blocx-checkbox-label-after-left:0 !default;
+$blocx-checkbox-label-after-display:none !default;
+$blocx-checkbox-label-before-left:0 !default;
+$blocx-checkbox-label-before-radius:3px !default;
+$blocx-input-group-position:relative !default;
+$blocx-input-group-display:flex !default;
+$blocx-input-group-flex-wrap: wrap !default;
+$blocx-input-group-align-items:stretch !default;
+$blocx-input-group-width:100% !default;
+$blocx-input-group-margin-bottom:20px !default;
+// Checkbox styles start
+
+li{
+    list-style-type: none;
+}
+.blocx-checkbox {
+    position: $blocx-input-group-position;
+    display: $blocx-input-group-display;
+    flex-wrap: $blocx-input-group-flex-wrap;
+    align-items: $blocx-input-group-align-items;
+    width: $blocx-input-group-width;
+    margin-bottom: $blocx-input-group-margin-bottom;
+    padding-top: 1px;
+    input[type=checkbox] {
+        @include blocx-abs($top: $blocx-checkbox-top, $left: $blocx-checkbox-left);
+        margin: $blocx-checkbox-margin;
+        padding: $blocx-checkbox-padding;
+        opacity: $blocx-checkbox-opacity;
+    }
+    label {
+        font-size: 13px;
+        //font-weight: bold;
+        display: inline-block;
+        margin-bottom: 8px;
+        line-height: 17px;
+        cursor: pointer;
+    }
+    .blocx-checkbox-label-style {
+        font-size: 13px;
+        //font-weight: bold;
+        display: inline-block;
+        //margin-bottom: 8px;
+        line-height: 17px;
+        cursor: pointer;
+    }
+    .checkbox-label {
+        position: $blocx-input-group-position;
+        padding-left: $blocx-checkbox-label-padding-left;
+        padding-top: $blocx-checkbox-label-padding-top;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        &::before,
+        &::after {
+            content: '';
+            display: $blocx-checkbox-label-before-after-display;
+            width: $blocx-checkbox-label-before-after-width;
+            height: $blocx-checkbox-label-before-after-height;
+            @include blocx-abs($top: $blocx-checkbox-label-before-after-top);
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        margin-bottom: 0px;
+        margin-right: 16px;
+        left: 10px;
+        top: -1px;
+    }
+    .checkbox-label::before {
+        left: $blocx-checkbox-label-before-left;
+        border-radius: $blocx-checkbox-label-before-radius;
+        @include blocx-themify($themes) {
+            background: url(map-get(blocx-themed('checkbox'), checkboxUnSelectIcon)) no-repeat center center;
+        }
+    }
+    .checkbox-label::after {
+        // top: 50%;
+        left: $blocx-checkbox-label-after-left;
+        display: $blocx-checkbox-label-after-display;
+        @include blocx-themify($themes) {
+            background: url(map-get(blocx-themed('checkbox'), checkboxSelectIcon)) no-repeat center center;
+        }
+    }
+    input[type=checkbox]:checked+label::before {
+        border: none;
+        box-shadow: none;
+    }
+    input[type=checkbox]:checked+label::after {
+        display: block;
+    }
+}
+
+// checkbox styles end

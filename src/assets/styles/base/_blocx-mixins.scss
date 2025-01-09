@@ -1,0 +1,242 @@
+    // Common mixins
+    @mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+        @if $enable-rounded {
+            border-radius: $radius;
+        }
+        @else if $fallback-border-radius !=false {
+            border-radius: $fallback-border-radius;
+        }
+    }
+    
+    @mixin border-top-radius($radius) {
+        @if $enable-rounded {
+            border-top-left-radius: $radius;
+            border-top-right-radius: $radius;
+        }
+    }
+    
+    @mixin border-right-radius($radius) {
+        @if $enable-rounded {
+            border-top-right-radius: $radius;
+            border-bottom-right-radius: $radius;
+        }
+    }
+    
+    @mixin border-bottom-radius($radius) {
+        @if $enable-rounded {
+            border-bottom-right-radius: $radius;
+            border-bottom-left-radius: $radius;
+        }
+    }
+    
+    @mixin border-left-radius($radius) {
+        @if $enable-rounded {
+            border-top-left-radius: $radius;
+            border-bottom-left-radius: $radius;
+        }
+    }
+    
+    @mixin border-top-left-radius($radius) {
+        @if $enable-rounded {
+            border-top-left-radius: $radius;
+        }
+    }
+    
+    @mixin border-top-right-radius($radius) {
+        @if $enable-rounded {
+            border-top-right-radius: $radius;
+        }
+    }
+    
+    @mixin border-bottom-right-radius($radius) {
+        @if $enable-rounded {
+            border-bottom-right-radius: $radius;
+        }
+    }
+    
+    @mixin border-bottom-left-radius($radius) {
+        @if $enable-rounded {
+            border-bottom-left-radius: $radius;
+        }
+    }
+    
+    @mixin blocx-rotate-y($deg) {
+        -ms-transform: rotateY($deg);
+        -webkit-transform: rotateY($deg);
+        -moz-transform: rotateY($deg);
+        -o-transform: rotateY($deg);
+        transform: rotateY($deg);
+    }
+    
+    @mixin blocx-abs($top:auto, $right:auto, $left:auto, $bottom:auto) {
+        position: absolute;
+        left: $left;
+        right: $right;
+        top: $top;
+        bottom: $bottom;
+    }
+    
+    @mixin blocx-transition($transition-element:all, $transition-time:0) {
+        -moz-transition: $transition-element $transition-time linear;
+        -webkit-transition: $transition-element $transition-time linear;
+        -o-transition: $transition-element $transition-time linear;
+        transition: $transition-element $transition-time linear;
+        -ms-transition: $transition-element $transition-time linear;
+    }
+    
+    @mixin blocx-abs-center() {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+    }
+    
+    @mixin blocx-translate-rotate() {
+        transform: translate(90deg, 90deg) rotate(45deg);
+        -webkit-transform: translate(90deg, 90deg) rotate(45deg);
+        -ms-transform: translate(90deg, 90deg) rotate(45deg);
+        -moz-transform: translate(90deg, 90deg) rotate(45deg);
+        -o-transform: translate(90deg, 90deg) rotate(45deg);
+    }
+    
+    @mixin blocx-text-truncate() {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    @mixin blocx-clearfix() {
+        &::after {
+            display: block;
+            clear: both;
+            content: "";
+        }
+    }
+    
+    @mixin blocx-reset-text {
+        font-family: $font-family-base;
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        line-height: $line-height-base;
+        text-align: left;
+        text-align: start;
+        text-decoration: none;
+        text-shadow: none;
+        text-transform: none;
+        letter-spacing: normal;
+        word-break: normal;
+        word-spacing: normal;
+        white-space: normal;
+        line-break: auto;
+    }
+    
+    @mixin sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
+    
+    @mixin sr-only-focusable {
+        &:not(:focus) {
+            @include sr-only();
+        }
+    }
+    
+    @mixin blocx-input-placeholder {
+        &.placeholder {
+            @content;
+        }
+        &:-moz-placeholder {
+            @content;
+        }
+        &::-moz-placeholder {
+            @content;
+        }
+        &:-ms-input-placeholder {
+            @content;
+        }
+        &::-webkit-input-placeholder {
+            @content;
+        }
+    }
+    
+    @mixin blocx-triangle($color, $direction, $size: 6px, $position: absolute, $round: false) {
+        @include pseudo($pos: $position);
+        width: 0;
+        height: 0;
+        @if $round {
+            border-radius: 3px;
+        }
+        @if $direction==down {
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-top: $size solid $color;
+            margin-top: 0 - round( $size / 2.5);
+        }
+        @else if $direction==up {
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-bottom: $size solid $color;
+            margin-bottom: 0 - round( $size / 2.5);
+        }
+        @else if $direction==right {
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent;
+            border-left: $size solid $color;
+            margin-right: -$size;
+        }
+        @else if $direction==left {
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent;
+            border-right: $size solid $color;
+            margin-left: -$size;
+        }
+    }
+    
+    @mixin blocx-hardware($backface: true, $perspective: 1000) {
+        @if $backface {
+            backface-visibility: hidden;
+        }
+        perspective: $perspective;
+    }
+    
+    @mixin blocx-opacity($opacity) {
+        opacity: $opacity;
+        $opacity-ie: $opacity * 100;
+        filter: alpha(opacity=$opacity-ie);
+    }
+    
+    @mixin font-size($size, $base: 16) {
+        font-size: $size;
+        font-size: ($size / $base) * 1rem;
+    }
+    
+    // @mixin retina($image, $width, $height) {
+    //     @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+    //         /* Serving 2x image on Retina display */
+    //         background-image: url($image);
+    //         background-size: $width $height;
+    //     }
+    // }
+    @mixin font-face($font-name, $file-name, $weight: normal, $style: normal) {
+        @font-face {
+            font-family: quote($font-name);
+            src: url($file-name + '.eot');
+            src: url($file-name + '.eot?#iefix') format('embedded-opentype'),
+            url($file-name + '.woff') format('woff'),
+            url($file-name + '.ttf') format('truetype'),
+            url($file-name + '.svg##{$font-name}') format('svg');
+            font-weight: $weight;
+            font-style: $style;
+        }
+    }

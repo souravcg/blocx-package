@@ -1,0 +1,652 @@
+// --------------------------------------------------
+// blocx variables
+// --------------------------------------------------
+
+// Prefix
+// -------------------------
+// You can optionally namespace blocx classes to avoid clashing with other css frameworks
+// e.g. setting $blocx-prefix as "blocx-" here would cause col-sm-6 to become blocx-col-sm-6
+// Example: $blocx-prefix: blocx-;
+// By default this is an empty string
+$blocx-prefix: 'blocx-grid_' !default;
+
+
+// Legacy support
+// -------------------------
+// blocx adds a lot of css propertie to support older browsers that don't support flexbox layout.
+// If you prefer to use this as a purely flexbox grid without legacy support then set this to false
+$legacy-support: true !default;
+
+// Responsive visibility helpers
+// -------------------------
+// blocx has some generic visibility classes to hide elements at different breakpoints.
+// If you want to disable these then set this to false
+$visibility-helpers: true !default;
+
+// Grid
+// -------------------------
+$blocx-columns: 12 !default; // number of columns
+
+// Breakpoints
+// -------------------------
+$blocx-xs: 576px !default;
+$blocx-sm: 768px !default;
+$blocx-md: 992px !default;
+$blocx-lg: 1200px !default;
+$blocx-xlg: 1600px !default;
+
+$blocx-xxs-max: ($blocx-xs - 1);
+$blocx-xs-max: ($blocx-sm - 1);
+$blocx-sm-max: ($blocx-md - 1);
+$blocx-md-max: ($blocx-lg - 1);
+$blocx-lg-max: ($blocx-xlg - 1);
+
+// Spacing
+// -------------------------
+$blocx-grid-spacing: 15px !default;
+
+// Custom properties so others can reference the variables.
+:root {
+  --blocx-columns: #{ $blocx-columns };
+  --blocx-grid-spacing: #{ $blocx-grid-spacing };
+  --blocx-xs: #{ $blocx-xs };
+  --blocx-sm: #{ $blocx-sm };
+  --blocx-md: #{ $blocx-md };
+  --blocx-lg: #{ $blocx-lg };
+  --blocx-xlg: #{ $blocx-xlg };
+  --blocx-xxs-max: #{ $blocx-xxs-max };
+  --blocx-xs-max: #{ $blocx-xs-max };
+  --blocx-sm-max: #{ $blocx-sm-max };
+  --blocx-md-max: #{ $blocx-md-max };
+  --blocx-lg-max: #{ $blocx-lg-max };
+}
+
+    
+// --------------------------------------------------
+// blocx mixins
+// --------------------------------------------------
+//
+// --------------------------------------------------
+// blocx grid generation mixins
+// --------------------------------------------------
+
+@mixin make-blocx-grid($class) {
+    @include loop-blocx-columns($blocx-columns, $class, width);
+}
+
+@mixin calc-blocx-columns($index, $class, $type) {
+    @if $type == width and $index > 0 {
+       .blocx-grid .#{$blocx-prefix}#{$class}#{$index} {
+            width: percentage(($index / $blocx-columns));
+            @if $legacy-support == true {
+                *width: percentage(($index / $blocx-columns)) - .1; // ie7 css hack
+            }
+            // @include box-sizing(border-box);
+            // @include reset-whitespace();
+            // position: relative;
+            // // width: 100%;
+            // vertical-align: top;
+            // padding: $blocx-grid-spacing;
+        
+            // &::before,
+            // &::after {
+            //     @include box-sizing(border-box);
+            //     @include reset-whitespace();
+            // }
+        
+            // // handle grids nested in columns
+            // .#{$blocx-prefix}grid {
+            //     @include flex(1, 1, auto);
+            //     margin: -$blocx-grid-spacing;
+            // }
+        
+            // @if $legacy-support == true {
+            //     display: inline-block;
+            //     *display: inline;
+            //     zoom: 1;
+            // }
+            
+        }
+    }
+}
+
+@mixin loop-blocx-columns($index, $class, $type) {
+    @if $index >= 0 {
+        @include calc-blocx-columns($index, $class, $type);
+        // next iteration
+        @include loop-blocx-columns(($index - 1), $class, $type);
+    }
+}
+
+// defaults for auto cols
+@mixin setup-auto-cols() {
+    @include flex(1, 0, 0px); // a unit on last value is required by IE10-11
+
+    @if $legacy-support == true {
+        width: auto;
+    }
+}
+
+// --------------------------------------------------
+// inline-block specific mixins
+// --------------------------------------------------
+
+@mixin setup-whitespace() {
+    @if $legacy-support == true {
+        letter-spacing: -.31em;
+        *letter-spacing: normal;
+        word-spacing: -.43em;
+    }
+}
+
+@mixin reset-whitespace() {
+    @if $legacy-support == true {
+        letter-spacing: normal;
+        word-spacing: normal;
+        white-space: normal;
+    }
+}
+
+@mixin reset-text-align() {
+    //
+    // We want to reset any text-align properties set by the grid
+    // (required for the inline-block fallback)
+    // but we don't want to override any text-align properties
+    // set on the individual col-x element
+    // or on any of it's child elements
+    //
+    // 1) set to left by default (works everywhere)
+    // 2) set to start (respects right to left text)
+    //
+    text-align: left;
+    text-align: start;
+    -moz-text-align-last: left;
+    -moz-text-align-last: start;
+    text-align-last: left;
+    text-align-last: start;
+}
+
+// --------------------------------------------------
+// order class generation mixins
+// --------------------------------------------------
+
+@mixin order($order: 0) {
+    -ms-flex-order: $order;
+    -webkit-order: $order;
+    order: $order;
+}
+
+@mixin make-order-helpers() {
+    @include loop-order-helpers($blocx-columns);
+}
+
+@mixin loop-order-helpers($index, $breakpoint: null) {
+    @if $index >= 0 {
+        .#{$blocx-prefix}order#{$breakpoint}-#{$index} {
+            @include order($index);
+        }
+        // next iteration
+        @include loop-order-helpers(($index - 1), $breakpoint);
+    }
+}
+
+// --------------------------------------------------
+// offset class generation mixins
+// --------------------------------------------------
+@mixin offset($index: 0) {
+    $offset: ($index / $blocx-columns);
+    // convert to percentage only if not zero
+    @if $offset != 0 {
+        $offset: percentage($offset);
+    }
+    margin-left: $offset;
+    @if $legacy-support == true {
+        *margin-left: percentage(($index / $blocx-columns)) - .1; // ie7 css hack
+    }
+}
+
+@mixin make-offset-helpers() {
+    @include loop-offset-helpers($blocx-columns - 1);
+}
+
+@mixin loop-offset-helpers($index, $breakpoint: null) {
+    @if $index > 0 and $breakpoint == null {
+        .#{$blocx-prefix}offset#{$breakpoint}-#{$index} {
+            @include offset($index);
+        }
+        // next iteration
+        @include loop-offset-helpers(($index - 1), $breakpoint);
+    } @else if $index >= 0 and $breakpoint != null {
+        .#{$blocx-prefix}offset#{$breakpoint}-#{$index} {
+            @include offset($index);
+        }
+        // next iteration
+        @include loop-offset-helpers(($index - 1), $breakpoint);
+    }
+}
+
+// --------------------------------------------------
+// blocx modifier mixins
+// --------------------------------------------------
+
+//
+// display
+// ---
+
+@mixin display-flex() {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+//
+// flex
+// ---
+
+@mixin flex($grow: 0, $shrink: 1, $basis: auto) {
+    @if $basis == 0 {
+        -ms-flex: $grow $shrink auto; //ie10 needs auto
+    } @else {
+        -ms-flex: $grow $shrink $basis;
+    }
+
+    -webkit-flex: $grow $shrink $basis;
+    flex: $grow $shrink $basis;
+}
+
+@mixin flex-grow($grow:1) {
+    -ms-flex-positive: $grow;
+    -webkit-flex-grow: $grow;
+    flex-grow: $grow;
+}
+
+@mixin flex-shrink($shrink:1) {
+    -ms-flex-negative: $shrink;
+    -webkit-flex-shrink: $shrink;
+    flex-shrink: $shrink;
+}
+
+@mixin flex-basis($basis:auto) {
+    -ms-flex-preferred-size: $basis;
+    -webkit-flex-basis: $basis;
+    flex-basis: $basis;
+}
+
+@mixin flex-flow($direction: row, $wrap: nowrap) {
+    -ms-flex-wrap: $wrap;
+    -ms-flex-direction: $direction;
+    -webkit-flex-flow: $direction $wrap;
+    flex-flow: $direction $wrap;
+}
+
+@mixin flex-wrap($wrap: wrap) {
+    -ms-flex-wrap: $wrap;
+    -webkit-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
+
+@mixin flex-direction($direction: row) {
+    -ms-flex-direction: $direction;
+    -webkit-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+//
+// align
+// ---
+
+@mixin align-items($align: stretch) {
+    @include ms-align-items($align);
+    -webkit-align-items: $align;
+    align-items: $align;
+}
+
+@mixin align-self($align: stretch) {
+    @include ms-align-self($align);
+    -webkit-align-self: $align;
+    align-self: $align;
+}
+
+@mixin align-content($align: stretch) {
+    @include ms-align-content($align);
+    -webkit-align-content: $align;
+    align-content: $align;
+}
+
+//
+// ie10 syntax for align
+// ---
+
+@mixin ms-align-items($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-align: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-align: end;
+    } @else {
+        -ms-flex-align: $align;
+    }
+}
+
+@mixin ms-align-self($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-item-align: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-item-align: end;
+    } @else {
+        -ms-flex-item-align: $align;
+    }
+}
+
+@mixin ms-align-content($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-line-pack: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-line-pack: end;
+    } @else if $align == 'space-between' {
+        -ms-flex-line-pack: justify;
+    } @else if $align == 'space-around' {
+        -ms-flex-line-pack: distribute;
+    } @else {
+        -ms-flex-line-pack: $align;
+    }
+}
+
+//
+// justify-content
+//
+// Uses "text-align" for the fallback inline-block grid
+// "text-align" is globally supported and works on all rows except the last
+// "text-align-last", where supported, handles the last line (and, happily, grids with only one row)
+// ---
+
+@mixin justify-content-start() {
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+@mixin justify-content-end() {
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+@mixin justify-content-center() {
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+@mixin justify-content-space-between() {
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+@mixin justify-content-space-around() {
+    -ms-flex-pack: distribute;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+// --------------------------------------------------
+// other mixins
+// --------------------------------------------------
+
+@mixin box-sizing($boxmodel) {
+    -webkit-box-sizing: $boxmodel;
+    -moz-box-sizing: $boxmodel;
+    box-sizing: $boxmodel;
+}
+
+@mixin responsive-visibility-helpers() {
+    @if $visibility-helpers == true {
+        .#{$blocx-prefix}hidden-xxs {
+            @media (max-width: $blocx-xxs-max) {
+                display: none;
+            }
+        }
+
+        .#{$blocx-prefix}hidden-xs {
+            @media (min-width: $blocx-xs) and (max-width: $blocx-xs-max) {
+                display: none;
+            }
+        }
+
+        .#{$blocx-prefix}hidden-sm {
+            @media (min-width: $blocx-sm) and (max-width: $blocx-sm-max) {
+                display: none;
+            }
+        }
+
+        .#{$blocx-prefix}hidden-md {
+            @media (min-width: $blocx-md) and (max-width: $blocx-md-max) {
+                display: none;
+            }
+        }
+
+        .#{$blocx-prefix}hidden-lg {
+            @media (min-width: $blocx-lg) and (max-width: $blocx-lg-max) {
+                display: none;
+            }
+        }
+
+        .#{$blocx-prefix}hidden-xlg {
+            @media (min-width: $blocx-xlg) {
+                display: none;
+            }
+        }
+    }
+}
+
+// --------------------------------------------------
+// blocx containers
+// --------------------------------------------------
+
+.#{$blocx-prefix}container,
+.#{$blocx-prefix}container-full {
+    @include box-sizing(border-box);
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: ($blocx-grid-spacing * 2);
+    padding-left: ($blocx-grid-spacing * 2);
+
+    .#{$blocx-prefix}blocx-grid {
+        margin-right: -$blocx-grid-spacing;
+        margin-left: -$blocx-grid-spacing;
+    }
+}
+
+.#{$blocx-prefix}container {
+    @media (min-width: $blocx-xs) {
+        max-width: $blocx-xs;
+    }
+
+    @media (min-width: $blocx-sm) {
+        max-width: $blocx-sm;
+    }
+
+    @media (min-width: $blocx-md) {
+        max-width: $blocx-md;
+    }
+
+    @media (min-width: $blocx-lg) {
+        max-width: $blocx-lg;
+    }
+
+    @media (min-width: $blocx-xlg) {
+        max-width: $blocx-xlg;
+    }
+}
+
+// --------------------------------------------------
+// blocx grid
+// --------------------------------------------------
+
+.blocx-grid {
+    @include box-sizing(border-box);
+    display: block;
+    @include display-flex();
+    @include flex-wrap();
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+   // @include setup-whitespace();
+
+    &::before,
+    &::after {
+        @include box-sizing(border-box);
+        @include reset-whitespace();
+    }
+
+    // handle when lists are used as a grid
+    list-style-type: none;
+}
+
+// --------------------------------------------------
+// blocx col defaults
+// --------------------------------------------------
+
+[class*="blocx-grid_col-"] {
+    @include box-sizing(border-box);
+    @include reset-whitespace();
+    position: relative;
+    width: 100%;
+    vertical-align: top;
+    padding: $blocx-grid-spacing;
+
+    &::before,
+    &::after {
+        @include box-sizing(border-box);
+        @include reset-whitespace();
+    }
+
+    // handle grids nested in columns
+    .#{$blocx-prefix}grid {
+        @include flex(1, 1, auto);
+        margin: -$blocx-grid-spacing;
+    }
+
+    @if $legacy-support == true {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+    }
+}
+
+// --------------------------------------------------
+// blocx grid generation
+// --------------------------------------------------
+
+@include make-blocx-grid(col-);
+
+@media (min-width: $blocx-xs) {
+    @include make-blocx-grid(col-xs-);
+}
+
+@media (min-width: $blocx-sm) {
+    @include make-blocx-grid(col-sm-);
+}
+
+@media (min-width: $blocx-md) {
+    @include make-blocx-grid(col-md-);
+}
+
+@media (min-width: $blocx-lg) {
+    @include make-blocx-grid(col-lg-);
+}
+
+@media (min-width: $blocx-xlg) {
+    @include make-blocx-grid(col-xlg-);
+}
+
+// --------------------------------------------------
+// blocx col-auto
+// --------------------------------------------------
+
+.blocx-grid .#{$blocx-prefix}col-auto {
+    @include setup-auto-cols();
+}
+
+@media (min-width: $blocx-xs) {
+   .blocx-grid .#{$blocx-prefix}col-xs-auto {
+        @include setup-auto-cols();
+    }
+}
+
+@media (min-width: $blocx-sm) {
+  .blocx-grid .#{$blocx-prefix}col-sm-auto {
+        @include setup-auto-cols();
+    }
+}
+
+@media (min-width: $blocx-md) {
+    .blocx-grid .#{$blocx-prefix}col-md-auto {
+        @include setup-auto-cols();
+    }
+}
+
+@media (min-width: $blocx-lg) {
+    .blocx-grid .#{$blocx-prefix}col-lg-auto {
+        @include setup-auto-cols();
+    }
+}
+
+@media (min-width: $blocx-xlg) {
+    .blocx-grid .#{$blocx-prefix}col-xlg-auto {
+        @include setup-auto-cols();
+    }
+}
+
+// --------------------------------------------------
+// blocx order helpers generation
+// --------------------------------------------------
+
+@include make-order-helpers();
+
+@media only screen and (min-width: $blocx-xs) {
+    @include loop-order-helpers($blocx-columns, '-xs');
+}
+
+@media only screen and (min-width: $blocx-sm) {
+    @include loop-order-helpers($blocx-columns, '-sm');
+}
+
+@media only screen and (min-width: $blocx-md) {
+    @include loop-order-helpers($blocx-columns, '-md');
+}
+
+@media only screen and (min-width: $blocx-lg) {
+    @include loop-order-helpers($blocx-columns, '-lg');
+}
+
+@media only screen and (min-width: $blocx-xlg) {
+    @include loop-order-helpers($blocx-columns, '-xlg');
+}
+
+// --------------------------------------------------
+// blocx offset helpers generation
+// --------------------------------------------------
+
+@include make-offset-helpers();
+
+@media only screen and (min-width: $blocx-xs) {
+    @include loop-offset-helpers($blocx-columns - 1, '-xs');
+}
+
+@media only screen and (min-width: $blocx-sm) {
+    @include loop-offset-helpers($blocx-columns - 1, '-sm');
+}
+
+@media only screen and (min-width: $blocx-md) {
+    @include loop-offset-helpers($blocx-columns - 1, '-md');
+}
+
+@media only screen and (min-width: $blocx-lg) {
+    @include loop-offset-helpers($blocx-columns - 1, '-lg');
+}
+
+@media only screen and (min-width: $blocx-xlg) {
+    @include loop-offset-helpers($blocx-columns - 1, '-xlg');
+}

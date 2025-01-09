@@ -1,0 +1,147 @@
+// Common variables
+// Color system
+
+
+$blue:    #0475d7 !default;
+$indigo:  #16325C !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #E32D0D !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #4BCA81 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+// colors
+$blocx-theme-color: #0475d7 !default;
+$blocx-zircon: #EBEDED !default;
+$blocx-saddle-brown: #72ACFF !default;
+$blocx-black-russian: #202124 !default;
+$blocx-white: #FFFFFF !default;
+$blocx-gainsboro:  #D8D8D8  !default;
+$blocx-bon-jour: #DDDBDA !default;
+$blocx-sandstone: #706E6B !default;
+$blocx-alice-blue: #F6F8F9 !default;
+$blocx-zorba: #969492 !default;
+$blocx-catalina-blue: #16325C !default;
+$blocx-mischka: #68717D !default;
+$blocx-navy-blue: #0070D2  !default;
+$blocx-violet-red: #3B86FF !default;
+$blocx-go-green: #0A854E  !default;
+$blocx-sunset-orange: #E32D0D !default;
+$blocx-supernova: #FFB936 !default;
+$blocx-light-blue: #72ACFF !default;
+$blocx-red: #FF4D4D !default;
+$blocx-green: #1DBD8E !default;
+$blocx-bokara-grey: #2B2826 !default;
+$blocx-gray50: #7F7F7F !default;
+$blocx-pink-swan: #68717D !default;
+$blocx-gray80: #CCCCCC !default;
+$blocx-dim-gray: #707070 !default;
+$blocx-black: #000000 !default;
+$blocx-hawkes-blue: #24231F !default;
+$blocx-pattens-blue: #BCE0FD !default;
+$blocx-light-alice-blue: #F1F9FF !default;
+$blocx-heavy-metal: #3E3E3C !default;
+$blocx-light-hawkes-blue: #D8DDE6 !default;
+$blocx-medium-turquoise: #C23934 !default;
+$blocx-desert-storm: #ECEBEA !default;
+$blocx-dodger-blue: #008DEF !default;
+$blocx-swirl: #C9C7C5 !default;
+$blocx-very-light-grey: #CECECE !default;
+$blocx-grey: #898989 !default;
+$blocx-suva-grey: #8E8E8E !default;
+$blocx-gray20: #333333 !default;
+$blocx-light-dim-gray: #717171 !default;
+$blocx-emerald: #4BCA81 !default;
+$blocx-medium-sea-green: #71D59B !default;
+$blocx-palette-gray7: #B0ADAB !default;
+$blocx-dark-blue: #0076DE !default;
+$blocx-dark-black: #080707 !default;
+$blocx-pantone: #A8B7C7 !default;
+$blocx-dark-salmon: #F05670 !default;
+$blocx-light-cyan: #5BC6CF !default;
+$blocx-dark-navy-blue: #383C77 !default;
+$blocx-gray93: #EDEDED !default;
+$blocx-solitude: #E0E5EE !default;
+$blocx-whisper: #E4E4E4 !default;
+$blocx-light-grey: #777777 !default;
+$blocx-gray74: #BDBDBD !default;
+$blocx-moccasin: #FFEABA !default;
+$blocx-nobel: #68717D !default;
+$blocx-heather: #BCC2C7 !default;
+$blocx-gray60: #999999 !default;
+
+
+$blocx-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$blocx-colors: map-merge(
+  (
+    "blue":       $blue,
+    "indigo":     $indigo,
+    "purple":     $purple,
+    "pink":       $pink,
+    "red":        $red,
+    "orange":     $orange,
+    "yellow":     $yellow,
+    "green":      $green,
+    "teal":       $teal,
+    "cyan":       $cyan
+  ),
+  $blocx-colors
+);
+
+$blocx-theme-primary-color:       $blue !default;
+$secondary:     $indigo !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "primary":    $blocx-theme-primary-color,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+  ),
+  $theme-colors
+);
+
+// theme specific colors
+ $blocx-input-type: 'full-border'!default;
+$theme-card-backgroud:#68717D!default;
+$theme-card-font-color:#ffffff!default;
+$theme-dependent-background:#FFC96C!default;
+$theme-dependent-font-color:$theme-card-font-color;
+$theme-background-checkbox-before:url("../assets/images/blocx-checkbox_icon-unselect.svg") no-repeat center center!default;
+$theme-background-checkbox-after:url("../assets/images/blocx-checkbox_icon-select.svg") no-repeat center center!default;
+$theme-background-radio-before:url("/../../../assets/images/blocx-radio_icon-unselect-theme1.svg") no-repeat center center!default;
+$theme-background-radio-after:url("/../../../assets/images/blocx-radio_icon-select-theme1.svg") no-repeat center center!default;
+
+
+
+/*============================ SIDENAV CSS | 30/05/2022 ================================*/
+
+.navHoverItem{
+  position: absolute;
+  left: 19%;
+  top: 49%;
+  width: 25%;
+  border: 1px solid #000;
+  transition: all 0.5s ease 1s;
+}
+
+.childNavItemDiv{
+  position: absolute;
+  top: 0;
+  left: 105%;
+  width: 40%;
+  border: 1px solid #000;
+  transition: all 0.5s ease 1s;
+}

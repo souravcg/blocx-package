@@ -1,0 +1,16 @@
+// import all base files
+//import theme1
+@import '_blocx-blue-hydrogen.scss';
+@import '_blocx-theme.scss';
+@import 'blocx-theme-mixin.scss';
+
+//import theme2
+//@import '_blocx-blocx-theme2.scss';
+// import common
+@import '_blocx-common.scss';
+@import	'_blocx-variables.scss',
+		'_blocx-mixins.scss',
+		'_blocx-form-validation.scss';
+
+@import './_blocx-grid.scss';
+@import './_blocx-mediaquries.scss';

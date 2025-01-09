@@ -1,0 +1,64 @@
+<!-- Check box html code start -->
+<ng-container *ngIf="checkboxType == 'single'">
+  <div class="blocx-checkbox">
+    <input
+      #input
+      type="checkbox"
+      [id]="inputId"
+      [required]="required"
+      [checked]="checked"
+      [disabled]="disabled"
+      [attr.name]="name"
+      [tabIndex]="tabIndex"
+      [attr.aria-label]="ariaLabel || null"
+      [attr.aria-labelledby]="ariaLabelledby"
+      [attr.aria-checked]="_getAriaChecked()"
+      (change)="_onInteractionEvent($event)"
+      (click)="_onInputClick($event)"
+    />
+    <label class="checkbox-label" [for]="inputId"></label>
+    <span class="blocx-checkbox-label-style"><ng-content ></ng-content></span>
+  </div>
+</ng-container>
+<!-- Check box html code end -->
+
+
+<!-- Nested Check box html code start -->
+
+<ng-container *ngIf="checkboxType == 'nested'">
+
+  <ul>
+    <ng-template #recursiveList let-dataList>
+      <li *ngFor="let item of dataList; let i = index">
+        
+        <div class="blocx-checkbox">
+          <input
+            #input
+            type="checkbox"
+            [id]="'blocx-checkbox-' + item.id"
+            [required]="required"
+            [(ngModel)]="item.isChecked"
+            [checked]="item.isChecked"
+            [disabled]="disabled"
+            [attr.name]="item.name"
+            [tabIndex]="i"
+            [attr.aria-label]="ariaLabel || null"
+            [attr.aria-labelledby]="ariaLabelledby"
+            [attr.aria-checked]="_getAriaChecked()"
+            (change)="_changeCheckboxEvent($event, item)"
+            (click)="_onInputClick($event)"
+          />
+          <label class="checkbox-label" [for]="'blocx-checkbox-' + item.id"> {{item.name}} </label>
+          <span class="blocx-checkbox-label-style"><ng-content ></ng-content></span>
+        </div>
+        
+        <ul *ngIf="item.subnodes.length > 0">
+          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.subnodes }"></ng-container>
+        </ul>
+      </li>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: dataList }"></ng-container>
+  </ul>
+</ng-container>
+
+<!-- Nested Check box html code end -->

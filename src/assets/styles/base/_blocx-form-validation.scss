@@ -1,0 +1,48 @@
+//the outline or border displays in red 
+.blocx-element-error{
+   border-color:#FF4D4D !important;
+}
+//error message displays in red
+.blocx-msg-error{
+    color:#FF4D4D;
+    font-size:13px;
+    line-height: 20px;
+    display: inline-block;
+   font-family: Helvetica, sans-serif;
+   margin:11px 0px 4px 0px !important;
+   font-weight: 900;
+   text-align: left;
+}
+//if the element needs to be disabled
+.blocx-element-disabled{
+	opacity:.5;
+	color:#ddd;
+	pointer-events:none !important;
+	cursor:not-allowed !important;
+}
+//add span tag and this class for asteric
+.blocx-asterisk{
+   display: inline-block;
+  
+   &::before{
+    content: "\f069";
+    font-family: 'FontAwesome',sans-serif;
+    font-size: 6px;
+    color: red;
+    position: absolute;
+    top: -3px;
+   }
+}
+.blocx-asterisk-left{
+   display: inline-block;
+  
+   &::before{
+    content: "\f069";
+    font-family: 'FontAwesome',sans-serif;
+    font-size: 6px;
+    color: red;
+    position: absolute;
+    top: -3px;
+    left:-6px;
+   }
+}

@@ -1,0 +1,32 @@
+/* Breakpoint sizes */
+$screen-xs-max: 576px;
+$screen-sm-max: 768px;
+$screen-md-max: 992px;
+$screen-lg-max: 1200px;
+
+/* Create the mixin for various screen resolutions */
+@mixin blocx-responsive-breakpoint($media) {
+    @if $media=='mobile' {
+        @media only screen and (max-width: $screen-xs-max) {
+            @content;
+        }
+    }
+
+    @else if $media=='tab' {
+        @media only screen and (max-width: $screen-sm-max) {
+            @content;
+        }
+    }
+
+    @else if $media=='desktop' {
+        @media only screen and (max-width: $screen-md-max) {
+            @content;
+        }
+    }
+
+    @else if $media=='lg-desktop' {
+        @media only screen and (max-width: $screen-lg-max) {
+            @content;
+        }
+    }
+}

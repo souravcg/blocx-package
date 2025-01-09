@@ -1,0 +1,36 @@
+// Common variables
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge( ( "100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900), $grays);
+$border-radius: 4px !default;
+$colors: () !default;
+$base-radius: 5px !default;
+$base-font-size: 14px !default;
+$font-semibold: 400 !default;
+$color-hover: #f3f3f3;
+// Borders
+$enable-rounded: true !default;
+$line-height-lg: 1.5 !default;
+$line-height-sm: 1.5 !default;
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+$border-radius: .4px !default;
+// $border-radius-lg : .4.8px !default;
+// $border-radius-sm : .3.2px !default;
+$rounded-pill: 800px !default;
+$box-shadow-sm: 0 2px 4px rgba($black, .075) !default;
+$box-shadow: 0 8px 16px rgba($black, .15) !default;
+$box-shadow-lg: 0 16px 48px rgba($black, .175) !default;
+$component-active-color: $white !default;
+$component-active-bg: theme-color("primary") !default;

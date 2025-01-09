@@ -1,0 +1,29 @@
+<svg id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Mask" d="M6.41.712,3.4,3.752a.23.23,0,0,1-.323,0L.066.712a.23.23,0,0,1,0-.323L.389.066a.23.23,0,0,1,.323,0L3.077,2.46a.23.23,0,0,0,.323,0L5.764.081a.23.23,0,0,1,.323,0L6.41.4a.243.243,0,0,1,0,.308Z" transform="translate(0 0)"/>
+    </clipPath>
+  </defs>
+  <rect id="Menu_background" data-name="Menu background" width="14" height="14" fill="rgba(0,0,0,0)"/>
+  <g id="Background" fill="#fff" stroke="#dddbda" stroke-miterlimit="10" stroke-width="1">
+    <rect width="14" height="14" rx="3" stroke="none"/>
+    <rect x="0.5" y="0.5" width="13" height="13" rx="2.5" fill="none"/>
+  </g>
+  <g id="Icon" transform="translate(3.182 3.182)">
+    <rect id="Icon_background" data-name="Icon background" width="7.636" height="7.636" fill="rgba(0,0,0,0)"/>
+    <rect id="Rectangle" width="7.636" height="7.636" fill="none"/>
+    <g id="Icon_Glyph" data-name="Icon Glyph">
+      <rect id="Icon_Glyph_background" data-name="Icon Glyph background" width="7.636" height="7.636" fill="rgba(0,0,0,0)"/>
+      <path id="Mask-2" data-name="Mask" d="M6.41.712,3.4,3.752a.23.23,0,0,1-.323,0L.066.712a.23.23,0,0,1,0-.323L.389.066a.23.23,0,0,1,.323,0L3.077,2.46a.23.23,0,0,0,.323,0L5.764.081a.23.23,0,0,1,.323,0L6.41.4a.243.243,0,0,1,0,.308Z" transform="translate(0.587 2.056)"/>
+      <g transform="translate(0.587 2.056)" clip-path="url(#clip-path)">
+        <g id="Icon_Color" data-name="Icon Color" transform="translate(-0.587 -2.056)">
+          <rect id="Icon_Color_background" data-name="Icon Color background" width="7.636" height="7.636" fill="rgba(0,0,0,0)"/>
+          <g id="z-nested_Color_Tokens_PALETTE_GRAY_9" data-name="z-nested / Color Tokens / PALETTE_GRAY_9">
+            <rect id="z-nested_Color_Tokens_PALETTE_GRAY_9_background" data-name="z-nested / Color Tokens / PALETTE_GRAY_9 background" width="7.636" height="7.636" fill="rgba(0,0,0,0)"/>
+            <rect id="Rectangle-2" data-name="Rectangle" width="7.636" height="7.636" fill="#706e6b"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

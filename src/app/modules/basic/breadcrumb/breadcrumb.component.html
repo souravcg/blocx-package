@@ -1,0 +1,7 @@
+<nav #blocxBreadcrumb [attr.aria-label]="ariaLabel">
+  <ol class="blocx-breadcrumb {{breadcrumbClassExtend}}">
+    <li (click)="onBlocxBreadcrumbClick($event)" class="blocx-breadcrumb_item {{item.class}}"
+    *ngFor="let item of breadcrumbChild" ><a *ngIf="item.class === ''" [routerLink]="">{{item.name}}</a> <span *ngIf="item.class === 'active'">{{item.name}}</span><i class="fa fa-angle-right"
+        aria-hidden="true"></i></li>
+  </ol>
+</nav>

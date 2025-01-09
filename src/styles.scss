@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './assets/styles/base/index';
+
+.d-none {
+    display: none !important;
+  }
+  .blocx-footer .blocx-input-group .blocx-input-control:focus {
+    border-color:white !important;
+  }
+  .blocx-tabs_navigation> li {
+    font-family: "Acumin Pro", sans-serif;
+  }
