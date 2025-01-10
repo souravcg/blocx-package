@@ -19,10 +19,8 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
-        working-directory: ./blocx-package
       - name: Build project
         run: npm run build
-        working-directory: ./blocx-package
 
   publish-gpr:
     needs: build
@@ -40,12 +38,10 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Install dependencies
         run: npm install
-        working-directory: ./blocx-package
       - name: Publish package
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: ./blocx-package
 
   debug:
     if: failure()
@@ -59,4 +55,3 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install || cat npm-debug.log
-        working-directory: ./blocx-package
