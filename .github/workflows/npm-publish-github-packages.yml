@@ -23,7 +23,7 @@ jobs:
 
       # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
 
       # Install dependencies
       - name: Install dependencies
@@ -55,13 +55,13 @@ jobs:
 
       # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
 
       # Publish the package to GitHub Packages
       - name: Publish package
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.BLOCX_AUTH }}
 
   debug:
     if: failure()
