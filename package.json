@@ -1,6 +1,6 @@
 {
-  "name": "@blocx/components",
-  "version": "1.0.0",
+  "name": "@souravcg/components",
+  "version": "1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,10 @@
     "package": "ng-packagr -p ng-package.json",
     "blocxcheck": "ng build && npm run package && npm pack ./dist"
   },
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@angular/animations": "^18.2.13",
     "@angular/cdk": "^17.3.10",

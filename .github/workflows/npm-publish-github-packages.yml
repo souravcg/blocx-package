@@ -1,41 +1,64 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
+name: Publish to GitHub Packages
 
 on:
   release:
-    types: [created]
+    types: [created] # Trigger the workflow when a new release is created
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # Set up Node.js and configure the registry for GitHub Packages
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@souravcg"
+
+      # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+
+      # Install dependencies
       - name: Install dependencies
         run: npm install
-      - name: Build project
-        run: npm run build
 
-  publish-gpr:
-    needs: build
+      # Build the library
+      - name: Build the package
+        run: npm run package
+
+  publish:
+    needs: build # Depends on the `build` job
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+      contents: write # Required for accessing repository contents
+      packages: write # Required for publishing packages
+
     steps:
+      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # Set up Node.js and configure the registry for GitHub Packages
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@souravcg"
+
+      # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-      - name: Publish to GitHub Packages
+
+      # Publish the package to GitHub Packages
+      - name: Publish package
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,12 +66,18 @@ jobs:
   debug:
     if: failure()
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
-        run: npm install || cat npm-debug.log
+
+      # Output debug information
+      - name: Print npm logs
+        run: cat ~/.npm/_logs/*.log || echo "No logs available"
