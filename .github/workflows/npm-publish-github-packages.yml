@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
-          scope: "@souravcg"
 
       # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
@@ -51,13 +50,12 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
-          scope: "@souravcg"
 
       # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
 
-      # Publish the package to GitHub Packages
+      # Publish package
       - name: Publish package
         run: npm publish
         env:
@@ -66,18 +64,14 @@ jobs:
   debug:
     if: failure()
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      # Output debug information
-      - name: Print npm logs
-        run: cat ~/.npm/_logs/*.log || echo "No logs available"
+      - name: Authenticate with GitHub Packages
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
+      - name: Install dependencies
+        run: npm install || cat npm-debug.log
