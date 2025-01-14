@@ -9,55 +9,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Node.js and configure the registry for GitHub Packages
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@souravcg"
 
-      # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
+        run: echo "@souravcg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build the library
       - name: Build the package
         run: npm run package
 
   publish:
-    needs: build # Depends on the `build` job
+    needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Required for accessing repository contents
-      packages: write # Required for publishing packages
+      contents: write
+      packages: write
 
     steps:
-      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Node.js and configure the registry for GitHub Packages
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@souravcg"
 
-      # Authenticate with GitHub Packages
       - name: Authenticate with GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
+        run: echo "@souravcg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
-      # Publish package
       - name: Publish package
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.BLOCX_AUTH }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   debug:
     if: failure()
@@ -65,11 +60,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Authenticate with GitHub Packages
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
-      - name: Install dependencies
-        run: npm install || cat npm-debug.log
+        run: echo "@souravcg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+
+      - name: Debug .npmrc
+        run: cat ~/.npmrc
+
+      - name: Print npm logs
+        run: cat ~/.npm/_logs/*.log || echo "No logs available"
