@@ -2,7 +2,7 @@ name: Publish to GitHub Packages
 
 on:
   release:
-    types: [created]
+    types: [created] # Trigger the workflow when a new release is created
 
 jobs:
   publish:
@@ -23,7 +23,7 @@ jobs:
           scope: "@souravcg"
 
       - name: Authenticate with GitHub Packages
-        run: echo "@souravcg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        run: echo "@souravcg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.BLOCX_AUTH }}" > ~/.npmrc
 
       - name: Debug .npmrc
         run: cat ~/.npmrc
@@ -31,13 +31,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build package
+      - name: Build the package
         run: npm run package
 
       - name: Publish package
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.BLOCX_AUTH }}
 
       - name: Debug npm logs
         run: cat ~/.npm/_logs/*.log || echo "No logs available"
