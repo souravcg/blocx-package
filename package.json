@@ -1,6 +1,8 @@
 {
   "name": "@souravcg/blocx-package",
   "version": "1.0.0",
+  "description": "Blocx is a reusable Angular components library.",
+  "keywords": ["angular", "library", "blocx", "components", "reusable"],
   "repository": {
     "type": "git",
     "url": "https://github.com/souravcg/blocx-package.git"
