@@ -1,6 +1,6 @@
 {
   "name": "@souravcg/blocx-package",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Blocx is a reusable Angular components library.",
   "keywords": ["angular", "library", "blocx", "components", "reusable"],
   "repository": {
