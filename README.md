@@ -1,27 +1,52 @@
-# BlocxAngularComponentsLatest
+Blocx Package
+Blocx is a reusable Angular components library that simplifies the development of modern, scalable, and maintainable web applications. It provides a set of lightweight, customizable, and performance-optimized UI components to accelerate your Angular project development.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+Features
+🌟 Reusable Components: Prebuilt, modular components to reduce repetitive coding tasks.
+⚡ Lightweight and Performant: Optimized for speed and minimal overhead.
+🔧 Customizable: Easily adapt components to match your project’s requirements.
+🚀 Developer-Friendly: Simplifies integration with clear documentation and intuitive APIs.
+📦 Seamless Angular Integration: Built to work effortlessly with Angular's architecture.
+Installation
+To install Blocx in your Angular project, run the following command:
 
-## Development server
+bash
+Copy code
+npm install @souravcg/blocx-package --registry=https://npm.pkg.github.com
+Usage Example
+Here's an example of how to use a Blocx component in your Angular project:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Step 1: Import the Component
+In your Angular module, import the required Blocx component:
 
-## Code scaffolding
+typescript
+Copy code
+import { BlocxComponent } from '@souravcg/blocx-package';
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+@NgModule({
+  declarations: [
+    // Your components
+  ],
+  imports: [
+    BlocxComponent
+  ]
+})
+export class AppModule { }
+Step 2: Add it to Your Template
+Use the Blocx component in your HTML template:
 
-## Build
+html
+Copy code
+<blocx-component [inputProp]="value"></blocx-component>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-## Running unit tests
+Feedback and Support
+Have questions, suggestions, or issues? Feel free to:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open an issue in the GitHub repository.
+Share your feedback via email or discussions.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+About Blocx
+Blocx was created to help Angular developers save time, write cleaner code, and deliver polished web applications with minimal effort. Whether you're working on a small project or a large-scale enterprise application, Blocx has you covered.
