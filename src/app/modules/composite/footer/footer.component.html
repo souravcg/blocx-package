@@ -1,0 +1,65 @@
+<!-- Footer Component HTML start -->
+<footer class="blocx-footer">
+  <ng-container>
+    <div class="blocx-grid_container">
+      <div class="blocx-grid">
+          <div class="blocx-grid_col-md-3 blocx-padding-bottom-0">
+              <div class="blocx-grid">
+                  <div class="blocx-grid_col-md blocx-padding-bottom-0">
+                      <h1>Logo</h1>
+                      <span>Brand GuideLines</span>
+                      <p>
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <div class="blocx-grid_col-md-5 footer-menu">
+              <div class="blocx-grid_col-md-3 blocx-grid_col-sm-3 blocx-grid_col-xs-3">
+                  <p>Links</p>
+                  <blocx-list [listItems]="menuList.one"></blocx-list>
+              </div>
+              <div class="blocx-grid_col-md-3 blocx-grid_col-sm-3 blocx-grid_col-xs-3"></div>
+              <div class="blocx-grid_col-md-2 blocx-grid_col-sm-3 blocx-grid_col-xs-3"></div>
+              <div class="blocx-grid_col-md-4 blocx-grid_col-sm-3 blocx-grid_col-xs-3 second-list">
+                  <p>Account Setting</p>
+                  <blocx-list [listItems]="menuList.two"></blocx-list>
+              </div>
+          </div>
+          <div class="blocx-grid_col-md-4 desktop-view-footer">
+              <div class="blocx-grid">
+                  <div class="blocx-grid_col-md">
+                      <div class="blocx-input-group">
+                          <div>Customer Service</div>
+                          <p>Email Sign Up</p>
+                          <span>Stay in touch with us for the freshest products!</span>
+                          <input class="blocx-input-control footer-control" placeholder="Placeholder text"
+                              type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ngModel
+                              #emailref="ngModel">
+                          <a aria-label="send"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                          <div *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)">
+                              <span [hidden]="!emailref.errors?.pattern" class="error-msg">
+                                  You have entered an invalid email address.
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="blocx-grid_col-md-8 icon-container">
+                      <ul class="blocx-menu social-media">
+                          <li><a aria-label="blocx social media instagram link"><i class="fa fa-instagram footr"
+                                      aria-hidden="true"></i></a></li>
+                          <li><a aria-label="blocx social media twitter link"><i class="fa fa-twitter footr"
+                                      aria-hidden="true"></i></a></li>
+                          <li><a aria-label="blocx social media facebook link"><i class="fa fa-facebook footr"
+                                      aria-hidden="true"></i></a></li>
+                          <li><a aria-label="blocx social media google link"><i class="fa fa-globe footr"
+                                      aria-hidden="true"></i></a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </ng-container>
+</footer>
+<!-- Footer Component HTML end -->

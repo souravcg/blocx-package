@@ -1,0 +1,270 @@
+@import "../../../../assets/styles/base/index";
+@import "../list/list.component.scss";
+@import "../../basic/input/input.component.scss";
+@import "../../../../assets/styles/base/blocx-grid";
+$blocx-footer-placeholder-color: #98A2B3 !default;
+$blocx-footer-span-color: #ffffff !default;
+$blocx-footer-span-font-size: 11px !default;
+$blocx-footer-span-padding-top: 15px !default;
+$blocx-footer-i-position: absolute !default;
+$blocx-footer-i-right: 10px !default;
+$blocx-footer-i-top: 12px !default;
+$blocx-footer-i-font-size: 16px !default;
+$blocx-footer-i-z-index: 4 !default;
+$blocx-footer-i-color: #ffffff !default;
+$blocx-footer-h4-text-transform: uppercase !default;
+$blocx-footer-h4-line-height: 20px !default;
+$blocx-footer-h4-color: #000 !default; //#ffffff
+$blocx-footer-h4-font-weight: bold !default;
+$blocx-footer-h4-font-size: 13px !default;
+$blocx-footer-menu-font-size: 13px !default;
+$blocx-footer-menu-color: #ffffff !default;
+$blocx-footer-menu-font-weight: bold !default;
+$blocx-footer-menu-text-align: left !default;
+$blocx-footer-menu-text-transform: none !default;
+$blocx-footer-social-media-li-display: inline-block !default;
+$blocx-footer-email-box-padding: 8px 30px 8px 20px !default;
+// blocx-footer component styles start
+.blocx-footer {
+    // background: $blocx-footer-background;
+    @include blocx-themify($themes) {
+        //background: blocx-themed("primaryColor");
+        background-color: #b9b9b9;
+    }
+    .blocx-input-group {
+        display: block;
+
+        div:first-child{
+            margin: 16px 0;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        p{
+            margin: 35px 0 0 0;
+            color: #000;
+        }
+        input.footer-control {
+            width: 75%;
+            // padding-right: 20px;
+            &:not(output):-moz-ui-invalid {
+                box-shadow: none;
+            }
+            // background: $blocx-footer-input-background;
+            @include blocx-themify($themes) {
+                background: blocx-themed("primaryColor");
+                &:focus {
+                    color: #706E6B;
+                    border-color: #EBEDED;
+                    min-height: 20px;
+                }
+            }
+            // .footer-control:focus{
+            //     border-color: #fff;
+            // }
+            background-color: #ffffff;
+            color: #706E6B;
+            padding: $blocx-footer-email-box-padding;
+            &::placeholder {
+                color: $blocx-footer-placeholder-color;
+                opacity: 50%;
+                // padding-left: 20px;
+            }
+            &::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: $blocx-footer-placeholder-color;
+                opacity: 0.5;
+                // padding-left: 20px;
+            }
+            &::-moz-placeholder {
+                /* Firefox 19+ */
+                color: $blocx-footer-placeholder-color;
+                opacity: 0.5;
+                // padding-left: 20px;
+            }
+            &:-ms-input-placeholder {
+                /* IE 10+ */
+                color: $blocx-footer-placeholder-color;
+                min-height: 20px;
+                opacity: 50%;
+                // padding-left: 20px;
+            }
+            &:-moz-placeholder {
+                /* Firefox 18- */
+                color: $blocx-footer-placeholder-color;
+                opacity: 50%;
+                // padding-left: 20px;
+            }
+            // &:focus {
+            //     border-color: unset;
+            // }
+        }
+        span {
+            color: #000;
+            font-size: 12px;
+            margin-top: 5px;
+            line-height: $blocx-footer-h4-line-height;
+            width: 100% !important;
+        }
+        span.error-msg,
+        span.error-msg-2 {
+            // display: none;
+            background-color: #ffffff;
+            // color: #ff4d4dd9;
+            @include blocx-themify($themes) {
+                color: map-get(blocx-themed("footer"), errorMsgColor);
+            }
+        }
+        i {
+            @include blocx-abs($top: 10px, $right: 12px);
+            // position: $blocx-footer-i-position;
+            // right: $blocx-footer-i-right;
+            // top: $blocx-footer-i-top;
+            top: 104px;
+            right: 42px;
+            font-size: $blocx-footer-i-font-size;
+            z-index: $blocx-footer-i-z-index;
+            @include blocx-themify($themes) {
+                color: #000;
+            }
+        }
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: $blocx-footer-h4-font-weight;
+        text-transform: $blocx-footer-h4-text-transform;
+        color: $blocx-footer-h4-color;
+        line-height: $blocx-footer-h4-line-height;
+    }
+    span{
+        font-size: 12px;
+    }
+    p{
+        font-size: 16px;
+    }
+    
+    .footer-menu{
+        p{
+            font-weight: bold;
+            color: #000;
+            padding-left: 16px;
+        }
+    }
+    .blocx-menu {
+        a {
+            font-size: $blocx-footer-menu-font-size;
+            color: #000;
+            text-transform: $blocx-footer-menu-text-transform;
+            line-height: $blocx-footer-h4-line-height;
+            //font-weight: $blocx-footer-menu-font-weight;
+            padding: 5px 15px;
+        }
+    }
+    .icon-container{
+        padding-top: 0;
+
+        .social-media {
+            a{
+                padding: 0px 25px 0px 5px;
+            }
+            li {
+                color: #fff;
+                display: $blocx-footer-social-media-li-display;
+                a {
+                    i.footr {
+                        color: #000;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .blocx-grid_col-xs-3 {
+        padding: 15px 0;
+    }
+
+    .blocx-grid_container {
+        padding: 0;
+    }
+
+    @media screen and (min-width:1024px) {
+        .mobile-view-footer {
+            display: none;
+        }
+        .desktop-view-footer {
+            display: block;
+        }
+    }
+    @media screen and (max-width:1023px) {
+        .mobile-view-footer {
+            display: block;
+        }
+        .desktop-view-footer {
+            display: none;
+        }
+        .blocx-input-group {
+            margin-bottom: 0;
+            width: 260px;
+        }
+        // .footer-menu {
+        //     padding-top: 0;
+        // }
+        .social-media {
+            li a {
+                padding: 0 16px;
+            }
+        }
+    }
+    @media screen and (min-width:577px) and (max-width:1023px) {
+        .blocx-grid_col-sm-5 {
+            padding-right: 8px;
+        }
+        .social-media {
+            text-align: center;
+            margin-left: 45px;
+        }
+    }
+    @media screen and (max-width:576px) {
+        .blocx-grid_col-xs-3 {
+            width: 45%;
+        }
+        .second-list {
+            padding-left: 38px;
+        }
+        .blocx-grid_container {
+            padding: 0;
+        }
+        .mobile-view-footer,
+        .footer-menu,
+        .blocx-grid_col-md-1 {
+            padding: 15px 4px;
+        }
+    }
+    // .blocx-input-group {
+    //     &::-webkit-clear-button,
+    //     &::-ms-clear-button,
+    //     &::-moz-clear-button,
+    //     &::-o-clear-button,
+    //     &::-webkit-inner-spin-button,
+    //     &::-ms-inner-spin-button,
+    //     &::-moz-inner-spin-button,
+    //     &::-o-inner-spin-button,
+    //     &::-webkit-calendar-picker-indicator,
+    //     &::-moz-calendar-picker-indicator,
+    //     &::-ms-calendar-picker-indicator,
+    //     &::-o-calendar-picker-indicator {
+    //         display: none;
+    //     }
+    // }
+    input::-ms-clear {
+        display: none;
+    }
+    @media screen and (max-width: 768px){
+.blocx-grid_container {
+    max-width: 768px;
+}
+}
+}
+
+// blocx-footer component styles end

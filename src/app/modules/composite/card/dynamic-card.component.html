@@ -1,0 +1,23 @@
+<!-- Card component HTML start -->
+<div [class]="cardType ? 'blocx-card ' + cardType : 'blocx-card'" tabindex="0" [id]="cardId" #blocxCardElement>
+        <ng-container>
+            <ng-content select="[card-image]"></ng-content>
+        </ng-container>
+        
+        <ng-container>
+    
+        </ng-container>
+
+        <div class="blocx-card_body">
+            <ng-container *ngIf="cardType == 'post' || 'post-thumnails-img-middle'">
+                <div class="blocx-card_header">
+                    <ng-content select="[card-header]"></ng-content>
+                </div>
+            </ng-container>
+            <ng-content select="[body-text]"></ng-content>
+            <div class="blocx-card_links">
+                <ng-content select="[body-links]"></ng-content>
+            </div>
+        </div>
+    </div>
+    <!-- Card component HTML end -->

@@ -1,0 +1,341 @@
+@import "../../../../assets/styles/base/index";
+@import "../../../../styles.scss";
+//heroslider component variables
+$heroslider-body-overflow: hidden !default;
+$heroslider-body-position: relative !default;
+$heroslider-body-width: 100% !default;
+$heroslider-body-height: 749px !default;
+$heroslider-body-text-align: center !default;
+$heroslider-body-h1-color: #2b2826 !default;
+$heroslider-body-h1-font-size: 50px !default;
+$heroslider-body-h1-font-weight: bold !default;
+$heroslider-body-h4-color: #2b2826 !default;
+$heroslider-body-h4-font-size: 16px !default;
+$heroslider-navigation-position: absolute !default;
+$heroslider-navigation-hover-cursor: pointer !default;
+$heroslider-navigation-img-border: 1px solid #dddbda !default;
+$heroslider-navigation-img-padding: 5px !default;
+$heroslider-navigation-img-border-radius: 6px !default;
+$heroslider-navigation-img-backgroud: #ffffff !default;
+$heroslider-navigation-leftbtn-position: relative !default;
+$heroslider-navigation-leftbtn-float: left !default;
+$heroslider-navigation-leftbtn-left: 50px !default;
+$heroslider-navigation-rightbtn-position: relative !default;
+$heroslider-navigation-rightbtn-float: right !default;
+$heroslider-navigation-rightbtn-left: 50px !default;
+$heroslider-navigation-rightbtn-text-align: right !default;
+$heroslider-block-top: 0px !default;
+$heroslider-block-width: 100% !default;
+$heroslider-block-height: 749px !default;
+$heroslider-block-position: absolute !default;
+$heroslider-block-left: 100% !default;
+$heroslider-block-background-size: 100% 100% !default;
+$heroslider-block-background-repeat: no-repeat !default;
+$heroslider-block-background-position: center center !default;
+$heroslider-block-content-position: inherit !default;
+$heroslider-block-content-top: 50% !default;
+$heroslider-block-content-left: 50% !default;
+$heroslider-block-content-transform: translate(-50%, -50%) !default;
+$heroslider-slideInRight-left: -100% !default;
+$heroslider-slideInRight-animation: slideIn 1s forwards !default;
+$heroslider-slideInLeft-left: 100% !default;
+$heroslider-slideInLeft-animation: slideIn 1s forwards !default;
+$heroslider-slideOutLeft-animation: slideOutLeft 1s forwards !default;
+$heroslider-slideOutRight-animation: slideOutRight 1s forwards !default;
+$heroslider-body-h4-line-height: 20px !default;
+//heroslider component styles start
+.blocx-slider {
+    position: relative;
+
+    .blocx-slider_dots {
+        position: absolute;
+        bottom: 10px;
+        text-align: center;
+        margin: auto;
+        width: 20%;
+        left: 0;
+        right: 0;
+    }
+
+    .blocx-slider_dot {
+        display: inline-block;
+        width: 50px;
+        height: 10px;
+        border-radius: 16px;
+        margin: 0 5px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+
+    .blocx-slider_dot.active {
+        background-color: #333;
+    }
+
+
+    &_body {
+        overflow: $heroslider-body-overflow;
+        position: $heroslider-body-position;
+        width: $heroslider-body-width;
+        // height: $heroslider-body-height;
+        text-align: $heroslider-body-text-align;
+        h1.blocx-slider_heading {
+            color: $heroslider-body-h1-color;
+            font-size: $heroslider-body-h1-font-size;
+            font-weight: $heroslider-body-h1-font-weight;
+            text-transform: uppercase;
+        }
+        @media screen and (max-width: 425px) {
+            h1.blocx-slider_heading {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+        }
+        .blocx-slider_subheading {
+            padding: 0px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media screen and (max-width: 425px) {
+            .blocx-slider_subheading {
+                position: relative;
+                h2 {
+                    padding: 0 10px 0 4px;
+                    font-size: 12px;
+                    max-width: 72px;
+                }
+            }
+        }
+        h2 {
+            font-size: $heroslider-body-h4-font-size;
+            color: $heroslider-body-h4-color;
+            line-height: $heroslider-body-h4-line-height;
+            text-transform: uppercase;
+            padding: 0 20px 0 10px;
+            font-weight: bold;
+        }
+        .hero-icon-web {
+            @include blocx-themify($themes) {
+                background: url(map-get(blocx-themed("hero"), webIcon)) no-repeat center center;
+            }
+            //background: url('../assets/images/blocx-hero_icon-web-default.svg') no-repeat center center;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+        .hero-icon-title {
+            @include blocx-themify($themes) {
+                background: url(map-get(blocx-themed("hero"), titleIcon)) no-repeat center center;
+            }
+            //background: url('../assets/images/blocx-hero_icon-topic-default.svg') no-repeat center center;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+    }
+    &_navigation {
+        @include blocx-abs($top: 50%);
+        display: flex;
+        justify-content: space-between;
+        width: calc(100% - 90px);
+        margin: 0 45px;
+        @media screen and (max-width: 769px) {
+            display: none;
+        }
+        @media screen and (min-width: 769px)and (max-width: 1280px) {
+            top: 35%;
+        }
+        .blocx-slider_navigation-leftbtn {
+            .left-nav {
+                @include blocx-themify($themes) {
+                    background: url(map-get(blocx-themed("hero"), leftArr)) no-repeat;
+                }
+                text-decoration: none;
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+            }
+        }
+        .blocx-slider_navigation-rightbtn {
+            .right-nav {
+                text-decoration: none;
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                @include blocx-themify($themes) {
+                    background: url(map-get(blocx-themed("hero"), rightArr)) no-repeat;
+                }
+            }
+        }
+         :hover {
+            cursor: $heroslider-navigation-hover-cursor;
+        }
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .blocx-slider_body {
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+    .blocx-slider_body {
+        height: 350px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1280px) {
+    .blocx-slider_body {
+        height: 550px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .blocx-slider_body {
+        height: 540px;
+    }
+}
+
+.blocx-slider_block {
+    background-size: $heroslider-block-background-size;
+    background-repeat: $heroslider-block-background-repeat;
+    background-position: $heroslider-block-background-position;
+    height: $heroslider-block-height;
+
+    background-position: calc(100% - 12px) center;
+    background-size: contain;
+
+    @media screen and (max-width: 425px) {
+        height: 170px;
+    }
+    @media screen and (min-width: 426px) and (max-width: 768px) {
+        height: 310px;
+    }
+    @media screen and (min-width: 769px) and (max-width: 1280px) {
+        height: 510px;
+    }
+    @include blocx-abs($top: 0px,
+    $left: 100%);
+    width: $heroslider-block-width;
+    .blocx-slider_block_content {
+        @include blocx-abs( $top: $heroslider-block-content-top, $left: $heroslider-block-content-left);
+        transform: $heroslider-block-content-transform;
+        width: 100%;
+
+        .product-info{
+            width: 50%;
+            text-align: left;
+            padding-left: 70px;
+        }
+
+        .product-title {
+            font-size: 64px;
+            font-weight: bold;
+            color: #828282;
+        }
+        .product-desc {
+            margin-top: 0.5em;
+            color: #828282;
+            font-size: 16px;
+        }
+        .more-btn {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            background-color: #12ABDB;
+        }
+    }
+}
+
+@media (pointer:coarse) {
+    .blocx-slider_navigation {
+        display: none;
+    }
+}
+
+@-webkit-keyframes slideIn {
+    100% {
+        left: 0;
+    }
+}
+
+@-moz-keyframes slideIn {
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes slideIn {
+    100% {
+        left: 0;
+    }
+}
+
+.slideInRight {
+    left: $heroslider-slideInRight-left;
+    -webkit-animation: $heroslider-slideInRight-animation;
+    -moz-animation: $heroslider-slideInRight-animation;
+    animation: $heroslider-slideInRight-animation;
+}
+
+.slideInLeft {
+    left: $heroslider-slideInLeft-left;
+    -webkit-animation: $heroslider-slideInLeft-animation;
+    -moz-animation: $heroslider-slideInLeft-animation;
+    animation: $heroslider-slideInLeft-animation;
+}
+
+@-webkit-keyframes slideOutLeft {
+    100% {
+        left: -100%;
+    }
+}
+
+@-moz-keyframes slideOutLeft {
+    100% {
+        left: -100%;
+    }
+}
+
+@keyframes slideOutLeft {
+    100% {
+        left: -100%;
+    }
+}
+
+.slideOutLeft {
+    -webkit-animation: $heroslider-slideOutLeft-animation;
+    -moz-animation: $heroslider-slideOutLeft-animation;
+    animation: $heroslider-slideOutLeft-animation;
+}
+
+@-webkit-keyframes slideOutRight {
+    100% {
+        left: 100%;
+    }
+}
+
+@-moz-keyframes slideOutRight {
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes slideOutRight {
+    100% {
+        left: 100%;
+    }
+}
+
+.slideOutRight {
+    -webkit-animation: slideOutRight 1s forwards;
+    -moz-animation: $heroslider-slideOutRight-animation;
+    animation: $heroslider-slideOutRight-animation;
+}
+
+//Slider component styles end

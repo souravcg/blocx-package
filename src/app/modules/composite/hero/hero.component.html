@@ -1,0 +1,25 @@
+<div class="blocx-slider {{heroCustomClass}}">
+    <div class="blocx-slider_body" id="heroSlider" #heroElemRef  tabindex="0">
+        <div *ngFor="let slider of heroSlider" id="blocx_slider_{{slider.id}}" class="blocx-slider_block" style="background-image:url('{{slider.background}}')">
+            <div class="blocx-slider_block_content">
+                <div class="product-container">
+                    <div class="product-info">
+                        <div class="product-title">{{slider.title}}</div>
+                        <p class="product-desc">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                            printer took a galley of type and scrambled it to make a type specimen book.
+                            It has survived not only five centuries, but also the leap into electronic typesetting,
+                            remaining essentially unchanged.
+                        </p>
+                        <button class="more-btn">More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="blocx-slider_dots">
+            <span *ngFor="let slider of heroSlider; let i = index" class="blocx-slider_dot" [class.active]="i === currentSlideIndex" (click)="scrollToSlide(slider, i)"></span>
+        </div>
+    </div>
+</div>
