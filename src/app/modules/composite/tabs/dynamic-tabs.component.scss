@@ -1,0 +1,127 @@
+@import "../../../../assets/styles/base/index";
+
+//Tab component variables
+$blocx-tab-float-left:left !default;
+$blocx-tab-display-block:block !default;
+$blocx-tab-width-100:100% !default;
+$blocx-tab-nav-margin:0 !default;
+$blocx-tab-nav-list-style:none !default;
+$blocx-tab-nav-border-bottom:2px solid #DDDBDA !default;
+$blocx-tab-nav-padding:0 !default;
+$blocx-tab-li-a-margin:2px !default;
+$blocx-tab-li-a-padding:8px 18px !default;
+$blocx-tab-li-a-border-radius:4px 4px 0 0 !default;
+$blocx-tab-li-a-font-size:13px !default;
+$blocx-tab-li-a-color:#2B2826 !default;
+$blocx-tab-li-active-a-color:#16325C !default;
+$blocx-tab-li-active-a-font-size:13px !default;
+$blocx-tab-li-active-a-font-weight:bold !default;
+$blocx-tab-li-a-font-weight:normal !default;
+$blocx-tab-li-a-line-height:20px !default;
+//$blocx-tab-li-active-a-border-bottom:2px solid $blocx-theme-primary-color;
+$blocx-tab-li-active-a-cursor:default;
+$blocx-tab-li-active-a-background:#EBEDED !default;
+$blocx-tab-content-active-padding:15px 0 !default;
+$blocx-tab-content-title-font-size: 24px !default;
+$blocx-tab-li-a-hover-border-color:#eee #eee #ddd !default;
+$tab-panel-display:none !default;
+$blocx-tab-li-a-text-decoration:none !default;
+//Tab component styles start
+.blocx-tabs {
+    &_navigation {
+        float: $blocx-tab-float-left;
+        width: $blocx-tab-width-100;
+        margin: $blocx-tab-nav-margin;
+        list-style-type: $blocx-tab-nav-list-style;
+        border-bottom: $blocx-tab-nav-border-bottom;
+        padding: $blocx-tab-nav-padding;
+        >li {
+            float: $blocx-tab-float-left;
+            margin-bottom: -2px;
+            >a {
+                float: $blocx-tab-float-left;
+                // margin-right: $blocx-tab-li-a-margin;
+                padding: $blocx-tab-li-a-padding;
+                @include blocx-themify($themes) {
+                    border-radius: map-get(blocx-themed('tabs'), tabBorder);
+                }
+                // @include blocx-themify($themes) {
+                //     border-radius: blocx-themed('borderRadius');
+                // }
+                // border-radius: $blocx-tab-li-a-border-radius;
+                font-size: $blocx-tab-li-a-font-size;
+                @include blocx-themify($themes) {
+                    color: map-get(blocx-themed('tabs'), tabTextColor);
+                }
+                text-decoration: $blocx-tab-li-a-text-decoration;
+                line-height: $blocx-tab-li-a-line-height;
+                font-weight: $blocx-tab-li-a-font-weight;
+                &:hover {
+                    border-color: $blocx-tab-li-a-hover-border-color;
+                }
+            }
+            @media screen and (max-width:500px) {
+                a {
+                    font-size: 12px;
+                    padding: 8px 7px;
+                    font-weight: normal;
+                }
+            }
+            &.active a {
+                color: $blocx-tab-li-active-a-color;
+            }
+            &.active {
+                >a,
+                >a:hover,
+                >a:focus {
+                    color: $blocx-tab-li-active-a-color;
+                    font-size: $blocx-tab-li-active-a-font-size;
+                    font-weight: $blocx-tab-li-active-a-font-weight;
+                    @include blocx-themify($themes) {
+                        border-bottom: 2px solid blocx-themed('primaryColor');
+                    }
+                    cursor: $blocx-tab-li-active-a-cursor;
+                    background-color: $blocx-tab-li-active-a-background;
+                    line-height: $blocx-tab-li-a-line-height;
+                    padding: 8px 14px;
+                }
+            }
+        }
+    }
+    &_content {
+        float: $blocx-tab-float-left;
+        width: $blocx-tab-width-100;
+        >.blocx-tab_panel {
+            display: $tab-panel-display;
+            h2 {
+                font-size: $blocx-tab-content-title-font-size;
+            }
+            p {
+                font-size: $blocx-tab-li-a-font-size;
+                font-weight: $blocx-tab-li-a-font-weight;
+                @include blocx-themify($themes) {
+                    color: map-get(blocx-themed('tabs'), tabTextColor);
+                }
+                line-height: $blocx-tab-li-a-line-height;
+            }
+            &.active {
+                display: $blocx-tab-display-block;
+                padding: $blocx-tab-content-active-padding;
+            }
+        }
+        >.active {
+            display: $blocx-tab-display-block;
+        }
+    }
+    @media screen and (max-width:376px) {
+        .blocx-tabs_navigation {
+            li.active {
+                a,
+                a:hover,
+                a:focus {
+                    padding: 8px 7px;
+                }
+            }
+        }
+    }
+}

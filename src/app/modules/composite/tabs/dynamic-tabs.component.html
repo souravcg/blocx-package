@@ -1,0 +1,9 @@
+<div class="blocx-tabs ">
+<ul class="blocx-tabs_navigation">
+    <li (tap)="onTap(tab)" *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">      
+      <a href="javascript:void(0)" class="{{tab.icon}}"><img *ngIf="tab.img" style="width:50px" src={{tab.img}} alt=""><div>{{tab.title}}</div></a>
+    </li>
+  </ul>
+  <ng-content></ng-content>
+  <ng-template dynamic-tabs #container></ng-template>
+</div>
